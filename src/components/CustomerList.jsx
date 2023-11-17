@@ -1,5 +1,7 @@
 import { AgGridReact } from "ag-grid-react";
 import { useEffect, useState } from "react";
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-material.css';
 
 
 export default function CustomerList() {
@@ -8,13 +10,13 @@ export default function CustomerList() {
 
     // columns for customers ag-grid
     const columns = [
-        { field: 'firstname' },
-        { field: 'lastname' },
-        { field: 'streetaddress' },
-        { field: 'postcode' },
-        { field: 'city' },
-        { field: 'email' },
-        { field: 'phone' }
+        { field: 'firstname', sortable: true, filter: true },
+        { field: 'lastname', sortable: true, filter: true },
+        { field: 'streetaddress', sortable: true, filter: true },
+        { field: 'postcode', sortable: true, filter: true },
+        { field: 'city', sortable: true, filter: true },
+        { field: 'email', filter: true },
+        { field: 'phone', filter: true }
     ];
 
     const REST_URL = 'https://traineeapp.azurewebsites.net/api/customers';
@@ -25,8 +27,8 @@ export default function CustomerList() {
         fetch(REST_URL)
             .then(response => response.json())
             .then(responseData => {
-                console.log("responseData" + responseData)
-
+                console.log("responseData" + responseData.content)
+                setCustomers(responseData.content)
             })
             .catch(error => console.error(error));
     }
