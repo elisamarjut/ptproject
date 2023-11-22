@@ -24,7 +24,6 @@ export default function EditCustomer(props) {
         setCustomer({ ...customer, [event.target.name]: event.target.value });
     }
 
-    // MITEN VIITATA OIKEAAN LINKKIIN??
     const handleUpdate = () => {
         props.updateCustomer(customer, props.params.links[0].href);
         setOpen(false); // suljetaan dialogi
