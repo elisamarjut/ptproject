@@ -4,7 +4,7 @@ import { useState } from "react"
 
 export default function AddCustomer(props) {
     // states
-    const [customer, setCustomer] = useState({ firstname: '', lastname: '', email: '' });
+    const [customer, setCustomer] = useState({ firstname: '', lastname: '', streetaddress: '', postcode: '', city: '', email: '', phone: '' });
     const [open, setOpen] = useState(false); // is dialog open?
 
     // functions
@@ -51,9 +51,41 @@ export default function AddCustomer(props) {
                     <br />
                     <TextField
                         margin="dense"
+                        label="Street address"
+                        name="streetaddress"
+                        value={customer.streetaddress}
+                        onChange={handleInputChanged}
+                    ></TextField>
+                    <br />
+                    <TextField
+                        margin="dense"
+                        label="Postcode"
+                        name="postcode"
+                        value={customer.postcode}
+                        onChange={handleInputChanged}
+                    ></TextField>
+                    <br />
+                    <TextField
+                        margin="dense"
+                        label="City"
+                        name="city"
+                        value={customer.city}
+                        onChange={handleInputChanged}
+                    ></TextField>
+                    <br />
+                    <TextField
+                        margin="dense"
                         label="Email"
                         name="email"
                         value={customer.email}
+                        onChange={handleInputChanged}
+                    ></TextField>
+                    <br />
+                    <TextField
+                        margin="dense"
+                        label="Phone"
+                        name="phone"
+                        value={customer.phone}
                         onChange={handleInputChanged}
                     ></TextField>
                 </DialogContent>

@@ -18,7 +18,11 @@ export default function CustomerList() {
     const columns = [
         { field: 'firstname', sortable: true, filter: true },
         { field: 'lastname', sortable: true, filter: true },
+        { field: 'streetaddress', filter: true },
+        { field: 'postcode', filter: true },
+        { field: 'city', filter: true },
         { field: 'email', filter: true },
+        { field: 'phone', filter: true },
         {
             cellRenderer: params => <EditCustomer params={params.data} updateCustomer={updateCustomer} />,
             width: 150
