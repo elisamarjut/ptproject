@@ -5,6 +5,7 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import { Button, Snackbar } from "@mui/material";
+import { CSVLink } from "react-csv";
 
 
 export default function CustomerList() {
@@ -18,7 +19,7 @@ export default function CustomerList() {
     const columns = [
         { field: 'firstname', sortable: true, filter: true },
         { field: 'lastname', sortable: true, filter: true },
-        { field: 'streetaddress', filter: true },
+        { field: 'streetaddress', headerName: 'Street address', filter: true },
         { field: 'postcode', filter: true },
         { field: 'city', filter: true },
         { field: 'email', filter: true },
@@ -106,6 +107,14 @@ export default function CustomerList() {
     return (
         <>
             <AddCustomer addCustomer={addCustomer} />
+            <br />
+            <CSVLink
+                data={customers}
+                filename={"Customer-data.csv"}
+                separator={";"}
+            >
+                Export to CSV
+            </CSVLink>
             <div className="ag-theme-material" style={{ height: '600px', width: '100%', margin: 'auto' }}>
                 <AgGridReact
                     rowData={customers}
