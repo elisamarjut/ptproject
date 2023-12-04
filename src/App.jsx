@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 import './App.css'
 import { AppBar, Typography } from '@mui/material'
 
-function App() {
+export default function App() {
 
   return (
     <div className='App'>
@@ -22,5 +22,3 @@ function App() {
     </div>
   )
 }
-
-export default App
