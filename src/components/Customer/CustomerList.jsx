@@ -67,7 +67,7 @@ export default function CustomerList() {
         // Confirming the deletion
         if (window.confirm('Are you sure you want to delete?')) {
             // Fetching customer to be deleted
-            fetch(params.data.links[0].href, { method: 'DELETE' })
+            fetch(params.data.links[0].href.replace('http://', 'https://'), { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
                         setMsg('Customer was deleted succesfully!');
@@ -114,7 +114,7 @@ export default function CustomerList() {
 
     // Updating/editing customer
     const updateCustomer = (customer, link) => {
-        fetch(link, {
+        fetch(link.replace('http://', 'https://'), {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(customer)
