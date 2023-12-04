@@ -16,6 +16,7 @@ export default function CustomerList() {
 
 
     // columns for customers ag-grid
+    // sorting and filtering
     const columns = [
         { field: 'firstname', sortable: true, filter: true },
         { field: 'lastname', sortable: true, filter: true },
@@ -39,23 +40,33 @@ export default function CustomerList() {
         }
     ];
 
+    // REST API URL
     const REST_URL = 'https://traineeapp.azurewebsites.net/api/customers';
 
+    // Getting customer data
+    const getCustomers = () => {
+        // fetching customers from the REST API
+        fetch(REST_URL)
+            .then(response => response.json()) // extracting json data
+            .then(responseData => {
+                // logging responseData into the console
+                console.log("responseData" + responseData.content);
+                // setting appropiate data to the customers state variable
+                setCustomers(responseData.content);
+            })
+            // error handling
+            .catch(err => console.error(err));
+    };
+
+    // Getting the customers only after the first render
     useEffect(() => getCustomers(), []);
 
-    const getCustomers = () => {
-        fetch(REST_URL)
-            .then(response => response.json())
-            .then(responseData => {
-                console.log("responseData" + responseData.content)
-                setCustomers(responseData.content)
-            })
-            .catch(error => console.error(error));
-    }
-
+    // Deleting a customer
     const deleteCustomer = (params) => {
         console.log("params: " + params.data.links[0].href)
+        // Confirming the deletion
         if (window.confirm('Are you sure you want to delete?')) {
+            // Fetching customer to be deleted
             fetch(params.data.links[0].href, { method: 'DELETE' })
                 .then(response => {
                     if (response.ok) {
@@ -63,30 +74,44 @@ export default function CustomerList() {
                         setOpen(true);
                         getCustomers();
                     } else {
-                        alert('Something went wrong in deleting the customer!')
+                        alert('Something went wrong in deletion!');
                     }
                 })
-                .catch(err => console.error(err));
+                // Error handling
+                .catch(err => {
+                    console.error('Error deleting customer:', err);
+                    alert('Something went wrong in deleting the customer!');
+                });
         }
-    }
+    };
 
+    // Adding a customer
     const addCustomer = (customer) => {
         fetch(REST_URL, {
             method: 'POST',
-            headers: { 'Content-type': 'application/json' },
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+            // Converting customer data into a string
             body: JSON.stringify(customer)
         })
             .then(response => {
                 if (response.ok) {
-                    setMsg('Customer was added succesfully!')
+                    setMsg('Customer was added succesfully!');
                     getCustomers();
                 } else {
                     alert('Something went wrong while adding a customer!');
                 }
             })
-            .catch(error => console.error(error));
-    }
+            // Error handling
+            .catch(err => {
+                console.error('Error adding cutomer:', err);
+                alert('Something went wrong in adding a customer!');
+            });
+    };
 
+    // Updating/editing customer
     const updateCustomer = (customer, link) => {
         fetch(link, {
             method: 'PUT',
@@ -95,15 +120,17 @@ export default function CustomerList() {
         })
             .then(response => {
                 if (response.ok) {
-                    setMsg('Customer info was updated succesfully!')
+                    setMsg('Customer info was updated succesfully!');
                     getCustomers();
                 } else {
                     alert('Something went wrong while updating the customer info!');
                 }
             })
-            .catch(error => console.error(error));
-    }
+            // Error handling
+            .catch(err => console.error(err));
+    };
 
+    // Headers for CSV export
     const headers = [
         { label: "First Name", key: "firstname" },
         { label: "Last Name", key: "lastname" },
