@@ -99,6 +99,7 @@ export default function CustomerList() {
             .then(response => {
                 if (response.ok) {
                     setMsg('Customer was added succesfully!');
+                    setOpen(true);
                     getCustomers();
                 } else {
                     alert('Something went wrong while adding a customer!');
@@ -121,6 +122,7 @@ export default function CustomerList() {
             .then(response => {
                 if (response.ok) {
                     setMsg('Customer info was updated succesfully!');
+                    setOpen(true);
                     getCustomers();
                 } else {
                     alert('Something went wrong while updating the customer info!');
