@@ -40,21 +40,21 @@ export default function TrainingList() {
         fetch(REST_URL)
             .then(response => response.json())
             .then(responseData => {
-                console.log("responseData" + responseData)
+                console.log("responseData" + responseData);
                 const formattedTrainings = responseData.map(training => {
                     const formattedDate = dayjs(training.date).format('DD.MM.YYYY HH:mm');
-                    return { ...training, date: formattedDate, }
-                })
+                    return { ...training, date: formattedDate };
+                });
 
-                setTrainings(formattedTrainings)
+                setTrainings(formattedTrainings);
             })
-            .catch(error => console.error(error))
+            .catch(error => console.error(error));
     };
 
 
     const deleteTraining = (params) => {
         const deleteURL = `https://traineeapp.azurewebsites.net/api/trainings/${params.data.id}`;
-        console.log("params: " + params.data.id)
+        console.log("params: " + params.data.id);
 
         if (window.confirm('Are you sure you want to delete?')) {
             fetch(deleteURL, { method: 'DELETE' })
@@ -72,9 +72,9 @@ export default function TrainingList() {
                     alert('Something went wrong while deleting the training!');
                 });
         }
-    }
+    };
 
-    const ADD_TRAINING_URL = 'https://traineeapp.azurewebsites.net/api/trainings'
+    const ADD_TRAINING_URL = 'https://traineeapp.azurewebsites.net/api/trainings';
 
     const addTraining = (training) => {
         fetch(ADD_TRAINING_URL, {
@@ -92,14 +92,14 @@ export default function TrainingList() {
                     setMsg('Training was added succesfully!');
                     getTrainings();
                 } else {
-                    alert('Something went wrong while adding a new training!')
+                    alert('Something went wrong while adding a new training!');
                 }
             })
             .catch(err => {
                 console.error('Error adding trainings:', err);
                 alert('Something went wrong while adding a new training!');
             });
-    }
+    };
 
     return (
         <>
@@ -119,5 +119,5 @@ export default function TrainingList() {
                 </Snackbar>
             </div>
         </>
-    )
+    );
 }
