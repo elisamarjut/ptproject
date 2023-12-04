@@ -104,13 +104,24 @@ export default function CustomerList() {
             .catch(error => console.error(error));
     }
 
+    const headers = [
+        { label: "First Name", key: "firstname" },
+        { label: "Last Name", key: "lastname" },
+        { label: "Street address", key: "streetaddress" },
+        { label: "Postcode", key: "postcode" },
+        { label: "City", key: "city" },
+        { label: "Email", key: "email" },
+        { label: "Phone", key: "phone" }
+    ];
+
     return (
         <>
             <AddCustomer addCustomer={addCustomer} />
             <br />
             <CSVLink
-                data={customers}
                 filename={"Customer-data.csv"}
+                data={customers}
+                headers={headers}
                 separator={";"}
             >
                 Export to CSV
