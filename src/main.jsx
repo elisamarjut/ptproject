@@ -37,7 +37,8 @@ const router = createBrowserRouter([
       }
     ]
   }
-], { basename: "ptproject" });
+]//,{ basename: "ptproject" }
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
