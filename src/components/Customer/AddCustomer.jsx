@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { useState } from "react"
+import { useState } from "react";
 
 
 export default function AddCustomer(props) {
@@ -12,16 +12,16 @@ export default function AddCustomer(props) {
         if (reason != 'backdropClick') {
             setOpen(false);
         }
-    }
+    };
 
     const handleInputChanged = (event) => {
         setCustomer({ ...customer, [event.target.name]: event.target.value });
-    }
+    };
 
     const handleSave = () => {
         props.addCustomer(customer);
         setOpen(false); // suljetaan dialogi
-    }
+    };
 
     // return
     // addbutton
@@ -97,5 +97,5 @@ export default function AddCustomer(props) {
                 </DialogActions>
             </Dialog>
         </>
-    )
+    );
 }
