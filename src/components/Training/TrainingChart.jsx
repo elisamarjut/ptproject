@@ -22,10 +22,17 @@ export default function TrainingChart() {
                     label: training.activity
                 }));
 
-                // const groupedActivities = _.groupBy(formattedActivities, 'label');
-                // const summedDurations = _.sumBy(formattedActivities, 'value');
+                // Grouping activities with the same label
+                const groupedActivities = _.groupBy(formattedActivities, 'label');
 
-                setActivities(formattedActivities);
+                // Using the _.map lodash function to iterate though each activity
+                // and summing up the durations of activities that have the same label
+                const activitiesWithSummedDurations = _.map(groupedActivities, (activities, label) => ({
+                    label,
+                    value: _.sumBy(activities, 'value')
+                }));
+
+                setActivities(activitiesWithSummedDurations);
             })
             // Error handling
             .catch(err => console.error('Error getting activities:', err))
