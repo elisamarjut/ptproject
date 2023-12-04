@@ -18,13 +18,13 @@ export default function CustomerList() {
     // columns for customers ag-grid
     // sorting and filtering
     const columns = [
-        { field: 'firstname', sortable: true, filter: true },
-        { field: 'lastname', sortable: true, filter: true },
-        { field: 'streetaddress', headerName: 'Street address', sortable: true, filter: true },
-        { field: 'postcode', sortable: true, filter: true },
-        { field: 'city', sortable: true, filter: true },
-        { field: 'email', sortable: true, filter: true },
-        { field: 'phone', sortable: true, filter: true },
+        { field: 'firstname', sortable: true, filter: true, floatingFilter: true },
+        { field: 'lastname', sortable: true, filter: true, floatingFilter: true },
+        { field: 'streetaddress', headerName: 'Street address', sortable: true, filter: true, floatingFilter: true },
+        { field: 'postcode', sortable: true, filter: true, floatingFilter: true },
+        { field: 'city', sortable: true, filter: true, floatingFilter: true },
+        { field: 'email', sortable: true, filter: true, floatingFilter: true },
+        { field: 'phone', sortable: true, filter: true, floatingFilter: true },
         {
             cellRenderer: params => <EditCustomer params={params.data} updateCustomer={updateCustomer} />,
             width: 150

@@ -15,11 +15,11 @@ export default function TrainingList() {
     // columns for training ag-grid
     // sorting and filtering
     const columns = [
-        { field: 'date', sortable: true, filter: true },
-        { field: 'duration', sortable: true, filter: true },
-        { field: 'activity', sortable: true, filter: true },
-        { field: 'customer.firstname', headerName: "Customer's firstname", sortable: true, filter: true },
-        { field: 'customer.lastname', headerName: "Customer's lastname", sortable: true, filter: true },
+        { field: 'date', sortable: true, filter: true, floatingFilter: true },
+        { field: 'duration', sortable: true, filter: true, floatingFilter: true },
+        { field: 'activity', sortable: true, filter: true, floatingFilter: true },
+        { field: 'customer.firstname', headerName: "Customer's firstname", sortable: true, filter: true, floatingFilter: true },
+        { field: 'customer.lastname', headerName: "Customer's lastname", sortable: true, filter: true, floatingFilter: true },
         {
             cellRenderer: params =>
                 <Button
